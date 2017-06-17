@@ -5,7 +5,7 @@
  */
 package workspace.newpackage;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  *
@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class GenericTree {
     
-    private Node root;
+    private Node root;  
     private int count;
     
     public GenericTree() {
@@ -23,21 +23,29 @@ public class GenericTree {
     
    
     public class Node{
-        
-        private char letra;
-        private ArrayList<Node> children;
+        Node father;
+        private char element;
+        private LinkedList<Node> subtree;
         private Palavra palavra;
         private boolean ultima;
-        public Node(char letra, Palavra palavra) {
-            this.letra = letra;
-            this.children = new ArrayList<Node>();
-            this.palavra = palavra;
-            this.ultima=ultima;
+        public Node(char element) {
+            this.element = element;
+            this.subtree = new LinkedList<Node>();
         }
     }
-    public void add(Palavra palavra){
-        if(root==null){
-            root= new Node(palavra.palavra.charAt(0), palavra);
+    public boolean add(Palavra palavra,int num){
+        Node aux=new Node(palavra.palavra.charAt(num));
+        if(palavra.palavra.length()>num){
+        if (root==null){
+            root=aux;
+            aux.father=root;
+        }if(root.subtree.isEmpty()){
+            root.subtree.add(aux);
+           return add(palavra,num+1);
+        }if(root.subtree.contains(aux)){
+           return add(palavra,num+1);
+        } Node temp=root;
         }
+        return true;
     }
 }
