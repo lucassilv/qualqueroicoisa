@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package workspace.newpackage;
+package workspace;
 
 import java.util.LinkedList;
 
@@ -84,20 +84,40 @@ public class GenericTree {
             return auxAdd(rootAux,palavra,num+1);
         }
     }
-      public LinkedList <String> getPalavras(String palavra,int i){
-        
-        LinkedList <String> aux=new LinkedList();
-        if(root.element==palavra.charAt(i)){
+      public LinkedList <String> getPalavras(String palavra,int num){
+        String formado="";
+          LinkedList <String> aux=new LinkedList();
+        if(num>palavra.length()) return aux;
+        if(root.element==palavra.charAt(num)){
             Node auxRoot=root;
-        if(root.ultima==true) aux.add(""+root.element);
-            String formado=root.element+"";
-            return auxGetPalavras(auxRoot, aux, palavra, formado,i+1);
-        }else
-          return aux;
+        if(root.ultima==true){ 
+            aux.add(""+root.element);
+                }else formado=root.element+"";
+            return auxGetPalavras(auxRoot, aux, palavra, formado,num+1);
+        }
+        Node auxRoot=root;
+        return auxGetPalavras(auxRoot, aux, palavra, formado,num);
        }
       
-      private LinkedList <String> auxGetPalavras(Node auxRoot,LinkedList<String> aux,String palavra,String formando,int i){
-          aux.add("");
-          return aux;
+    private LinkedList <String> auxGetPalavras(Node auxRoot,LinkedList<String> aux,String palavra,String formando,int num){
+        if(auxRoot==null) return getPalavras(palavra,num);
+            if(num>palavra.length()){   
+                if(auxRoot.subtree.isEmpty()==false){
+                    for(int i=0;i<auxRoot.subtree.size();i++){
+                        if(auxRoot.subtree.get(i).element==palavra.charAt(num)){
+                            auxRoot=auxRoot.subtree.get(i);
+                            if(auxRoot.ultima==true){ 
+                                aux.add(""+root.element);
+                            }else formando=auxRoot.element+"";
+                            auxGetPalavras(auxRoot, aux, palavra, formando, num+1);
+                        }
+                    }
+                }else{
+                    auxRoot=auxRoot.subtree.getFirst().father;
+                    auxGetPalavras(auxRoot, aux, palavra, formando, num);
+                }
+            }
+            
+            return null;
        }
 }

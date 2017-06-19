@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package workspace.newpackage;
+package workspace;
 
 import java.util.Scanner;
 
@@ -38,6 +38,7 @@ public class App {
                                            break;
                                         case 0: 
                                             System.out.println("Finalizando");
+                                            break;
                                         default: 
                                             System.out.println("Opção invalida");
                                             break;
