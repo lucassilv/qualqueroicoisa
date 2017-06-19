@@ -43,16 +43,17 @@ public class GenericTree {
         Node aux=new Node(palavra.palavra.charAt(num));
         if (root==null){
             root=aux;
-            add(palavra,num+1);
             if(palavra.palavra.length()-1==num){
             root.ultima=true;
             }
-        }if(root.subtree.isEmpty()){
+            add(palavra,num+1);
+        }if(root.subtree.isEmpty()==true){
+            
+            if(palavra.palavra.length()-1==num){
+            aux.ultima=true;
+            }
             aux.father=root;
             root.subtree.add(aux);
-            if(palavra.palavra.length()-1==num){
-            root.ultima=true;
-            }
            return add(palavra,num+1);
         }
         Node rootAux=root;
@@ -67,23 +68,26 @@ public class GenericTree {
             return true;
          }
         Node aux=new Node(palavra.palavra.charAt(num));
-        if(rootAux.subtree.contains(aux)){
+        if(rootAux.subtree.contains(aux)==true){
         int indice = 0;
             for(int i=0;i<root.subtree.size();i++){
                 if(rootAux.subtree.get(i).element==palavra.palavra.charAt(num))indice=i;
             }
         rootAux=rootAux.subtree.get(indice);
         return auxAdd(rootAux,palavra,num+1);
-        }else {
-            rootAux.subtree.add(aux);
-            if(palavra.palavra.length()-1==num){
-            root.ultima=true;
-            }
-            aux.father=rootAux;
-            rootAux=root.subtree.getLast();
-            return auxAdd(rootAux,palavra,num+1);
+//        }else {
+//            rootAux.subtree.add(aux);
+//            if(palavra.palavra.length()-1==num){
+//            root.ultima=true;
+//            }
+//            aux.father=rootAux;
+//            rootAux=root.subtree.getLast();
+//            return auxAdd(rootAux,palavra,num+1);
+//        }
+//    } 
         }
-    }
+        return false;
+     }
       public LinkedList <String> getPalavras(String palavra,int num){
         String formado="";
           LinkedList <String> aux=new LinkedList();
