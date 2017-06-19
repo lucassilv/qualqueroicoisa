@@ -30,17 +30,17 @@ public class App {
                 System.out.println  ("1. Exibir índice\n" +
                                     "0. Sair");
                                     op=sc.nextInt();
-                                          switch(op){
+                                        switch(op){
                                         case 1:
                                            System.out.println("Digite a palavra ou as inicias da palavra que busca: ");
                                            String caracteres=sc.nextLine();
                                            caseBusca(caracteres);
                                            break;
                                         case 0: 
-                                             System.out.println("Finalizando");
+                                            System.out.println("Finalizando");
                                         default: 
-                                               System.out.println("Opção invalida");
-                                               break;
+                                            System.out.println("Opção invalida");
+                                            break;
                                     }
             }while(op!=0);
             
